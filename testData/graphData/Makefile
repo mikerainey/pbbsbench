@@ -7,6 +7,8 @@ NOTUPDATED_GENERATORS = powerGraph addWeights randDoubleVector fromAdjIdx adjEli
 
 .PHONY: all clean
 all: $(GENERATORS)
+install:
+	cp $(GENERATORS) $(INSTALL_FOLDER)
 
 %.o : %.C $(COMMON)
 	$(CC) $(CFLAGS) -c $< -o $@

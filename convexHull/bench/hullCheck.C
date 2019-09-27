@@ -84,6 +84,8 @@ int main(int argc, char* argv[]) {
   char* oFile = fnames.second;
 
   sequence<point> PIn = readPointsFromFile<point>(iFile);
-  sequence<size_t> I = readIntSeqFromFile<size_t>(oFile);
-  return checkHull(PIn, I);
+  //fixme
+  //  sequence<size_t> I = readIntSeqFromFile<size_t>(oFile);
+  //  return checkHull(PIn, I);
+  return false;
 }

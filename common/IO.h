@@ -197,7 +197,7 @@ namespace benchIO {
   template <class T>
   sequence<T> readIntSeqFromFile(char const *fileName) {
     sequence<char> S = pbbs::char_seq_from_file(fileName);
-    sequence<range<char*>> W = pbbs::tokens(S, pbbs::is_space);
+    sequence<range<char*>> W = pbbs::tokenize(S, pbbs::is_space);
     string header = (string) W[0].begin();
     if (header != intHeaderIO) {
       cout << "readIntSeqFromFile: bad input" << endl;
