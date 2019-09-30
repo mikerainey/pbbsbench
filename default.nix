@@ -15,16 +15,16 @@ stdenv.mkDerivation rec {
   src = dfltSrc;
 
   buildInputs =
-      [ makeWrapper gcc which ]
-      ++ (if useJemalloc then [ jemalloc ] else []);
+    [ makeWrapper gcc which ]
+    ++ (if useJemalloc then [ jemalloc ] else []);
   
   buildPhase =
-      ''
-      rm -f pbbslib
-      ln -s ${pbbslib} pbbslib
+    ''
+    rm -f pbbslib
+    ln -s ${pbbslib} pbbslib
 
-      make -j -C testData/graphData all
-      '';
+    make -j -C testData/graphData all
+    '';
 
   installPhase =
     ''
@@ -37,7 +37,10 @@ stdenv.mkDerivation rec {
     mkdir -p $out/testData/graphData
     make -C testData/graphData install INSTALL_FOLDER="$out/testData/graphData"
 
-    mkdir -p $out/benchSrc
-    (cd convexHull/quickHull; cp *.h *.C $out/benchSrc)
+    BENCHMARKS=$out/benchmarkSrc/b/
+    mkdir -p $BENCHMARKS
+    (cd convexHull/quickHull; cp *.h *.C $BENCHMARKS)
+
+    ln -s ${pbbslib} $out/pbbslib
     '';
 }   
