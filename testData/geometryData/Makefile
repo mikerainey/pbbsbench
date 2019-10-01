@@ -6,6 +6,8 @@ TO_UPDATE = triangles addRays toNodes
 
 .PHONY: all clean
 all: $(GENERATORS)
+install:
+	cp $(GENERATORS) $(INSTALL_FOLDER)
 
 %.o : %.C $(COMMON) 
 	$(CC) $(CFLAGS) -c $< -o $@

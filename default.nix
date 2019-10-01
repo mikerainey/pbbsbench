@@ -23,6 +23,7 @@ stdenv.mkDerivation rec {
     rm -f pbbslib
     ln -s ${pbbslib} pbbslib
 
+    make -j -C testData/geometryData all
     make -j -C testData/graphData all
     '';
 
@@ -32,6 +33,9 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/common/
     cp common/*.h $out/common
+
+    mkdir -p $out/testData/geometryData
+    make -C testData/geometryData install INSTALL_FOLDER="$out/testData/geometryData"
     
     mkdir -p $out/testData/
     mkdir -p $out/testData/graphData
