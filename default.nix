@@ -3,8 +3,7 @@
   makeWrapper ? pkgs.makeWrapper,
   gcc ? pkgs.gcc7,
   which ? pkgs.which,
-  jemalloc ? pkgs.jemalloc,
-  useJemalloc ? false,
+  jemalloc ? pkgs.jemalloc, # use jemalloc, unless this parameter equals null
   dfltSrc ? ./.,
   pbbslib ? import ../pbbslib/default.nix {}
 }:
@@ -16,10 +15,18 @@ stdenv.mkDerivation rec {
 
   buildInputs =
     [ makeWrapper gcc which ]
-    ++ (if useJemalloc then [ jemalloc ] else []);
-  
+    ++ (if jemalloc == null then [] else [ jemalloc ]);
+
   buildPhase =
+    let jemallocCfg = 
+          if jemalloc == null then
+            ""
+          else
+            "export PATH=${jemalloc}/bin:$PATH";
+    in
     ''
+    ${jemallocCfg}
+
     rm -f pbbslib
     ln -s ${pbbslib} pbbslib
 
