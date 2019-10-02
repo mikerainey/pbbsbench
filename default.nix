@@ -4,8 +4,8 @@
   gcc ? pkgs.gcc7,
   which ? pkgs.which,
   jemalloc ? pkgs.jemalloc, # use jemalloc, unless this parameter equals null
-  dfltSrc ? ./.,
-  pbbslib ? import ../pbbslib/default.nix {}
+  pbbslib ? import ../pbbslib/default.nix { gcc = gcc; jemalloc = jemalloc; },
+  dfltSrc ? ./.
 }:
 
 stdenv.mkDerivation rec {
@@ -34,24 +34,23 @@ stdenv.mkDerivation rec {
     make -j -C testData/graphData all
     '';
 
+  outputs = [ "out" "testData" ];
+
   installPhase =
     ''
-    mkdir -p $out/
-
     mkdir -p $out/common/
     cp common/*.h $out/common
 
-    mkdir -p $out/testData/geometryData
-    make -C testData/geometryData install INSTALL_FOLDER="$out/testData/geometryData"
-    
-    mkdir -p $out/testData/
-    mkdir -p $out/testData/graphData
-    make -C testData/graphData install INSTALL_FOLDER="$out/testData/graphData"
+    ln -s ${pbbslib} $out/pbbslib
 
-    BENCHMARKS=$out/benchmarkSrc/b/
+    BENCHMARKS=$out/benchmarks/all/
     mkdir -p $BENCHMARKS
     (cd convexHull/quickHull; cp *.h *.C $BENCHMARKS)
 
-    ln -s ${pbbslib} $out/pbbslib
+    mkdir -p $testData/geometryData
+    make -C testData/geometryData install INSTALL_FOLDER="$testData/geometryData"
+    
+    mkdir -p $testData/graphData
+    make -C testData/graphData install INSTALL_FOLDER="$testData/graphData"
     '';
 }   
