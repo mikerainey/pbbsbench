@@ -43,14 +43,16 @@ stdenv.mkDerivation rec {
 
     ln -s ${pbbslib} $out/pbbslib
 
-    BENCHMARKS=$out/benchmarks/all/
-    mkdir -p $BENCHMARKS
-    (cd convexHull/quickHull; cp *.h *.C $BENCHMARKS)
+    ALL_BENCHMARKS=$out/benchmarks/all/
+    mkdir -p $ALL_BENCHMARKS
+    (cd convexHull/quickHull; cp *.h *.C $ALL_BENCHMARKS)
 
     mkdir -p $testData/geometryData
-    make -C testData/geometryData install INSTALL_FOLDER="$testData/geometryData"
+    make -C testData/geometryData install \
+      INSTALL_FOLDER="$testData/geometryData"
     
     mkdir -p $testData/graphData
-    make -C testData/graphData install INSTALL_FOLDER="$testData/graphData"
+    make -C testData/graphData install \
+      INSTALL_FOLDER="$testData/graphData"
     '';
 }   
