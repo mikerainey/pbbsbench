@@ -9,7 +9,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  name = "pbbslib";
+  name = "pbbsbench";
   
   src = dfltSrc;
 
@@ -43,9 +43,12 @@ stdenv.mkDerivation rec {
 
     ln -s ${pbbslib} $out/pbbslib
 
-    ALL_BENCHMARKS=$out/benchmarks/all/
-    mkdir -p $ALL_BENCHMARKS
-    (cd convexHull/quickHull; cp *.h *.C $ALL_BENCHMARKS)
+    # Convex Hull
+    mkdir -p $out/convexHull
+    ( QH=convexHull/quickHull
+      cd $QH;
+      mkdir -p $out/$QH
+      cp *.h *.C $out/$QH )
 
     mkdir -p $testData/geometryData
     make -C testData/geometryData install \
