@@ -17,6 +17,8 @@ stdenv.mkDerivation rec {
     [ makeWrapper gcc which ]
     ++ (if jemalloc == null then [] else [ jemalloc ]);
 
+  enableParallelBuilding = true;
+  
   buildPhase =
     let jemallocCfg = 
           if jemalloc == null then
@@ -30,8 +32,8 @@ stdenv.mkDerivation rec {
     rm -f pbbslib
     ln -s ${pbbslib} pbbslib
 
-    make -j -C testData/geometryData all
-    make -j -C testData/graphData all
+    make -j $NIX_BUILD_CORES -C testData/geometryData all
+    make -j $NIX_BUILD_CORES -C testData/graphData all
     '';
 
   outputs = [ "out" "testData" ];
