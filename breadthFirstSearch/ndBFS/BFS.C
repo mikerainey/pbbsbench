@@ -24,7 +24,7 @@
 #include "sequence.h"
 #include "graph.h"
 #include "parallel.h"
-#include "BFS.h"
+//#include "BFS.h"
 #include <limits>
 using namespace std;
 
@@ -37,7 +37,10 @@ using namespace std;
 //      in the new graph are the children in the bfs tree)
 // **************************************************************
 
-std::pair<vertexId,size_t> BFS(vertexId start, Graph &G) {
+template <class intV = long, class intE = intV>
+std::pair<intV,size_t> BFS(intV start, graph<intV, intE> &G) {
+  using vertexId = intV;
+  using edgeId = intE;
   vertexId numVertices = G.numVertices();
   edgeId numEdges = G.m;
   vertexId maxIdx = std::numeric_limits<vertexId>::max();
