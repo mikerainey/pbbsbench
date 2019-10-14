@@ -45,12 +45,9 @@ stdenv.mkDerivation rec {
 
     ln -s ${pbbslib} $out/pbbslib
 
-    # Convex Hull
-    mkdir -p $out/convexHull
-    ( QH=convexHull/quickHull
-      cd $QH;
-      mkdir -p $out/$QH
-      cp *.h *.C $out/$QH )
+    # Sources
+    cp -r convexHull $out/convexHull
+    cp -r breadthFirstSearch $out/breadthFirstSearch
 
     mkdir -p $testData/geometryData
     make -C testData/geometryData install \
