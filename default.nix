@@ -1,3 +1,7 @@
+# To generate symlinks for all attributes, including test-data gen, run
+#   $ nix-build -A all
+# and look for symlinks named `result` and `result-testData`.
+
 { pkgs   ? import <nixpkgs> {},
   stdenv ? pkgs.stdenv,
   makeWrapper ? pkgs.makeWrapper,
