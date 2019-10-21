@@ -80,7 +80,7 @@ edgeArray<intV> edgeRmat(size_t n, size_t m, size_t seed,
 
 int main(int argc, char* argv[]) {
   commandLine P(argc,argv,
-		"[-m <numedges>] [-s <intseed>] [-o] [-j] [-a <a>] [-b <b>] [-c <c>] n <outFile>");
+		"[-m <numedges>] [-s <intseed>] [-t] [-o] [-j] [-a <a>] [-b <b>] [-c <c>] n <outFile>");
   pair<size_t,char*> in = P.sizeAndFileName();
   size_t n = in.first;
   char* fname = in.second;
@@ -91,7 +91,8 @@ int main(int argc, char* argv[]) {
   size_t seed = P.getOptionLongValue("-s", 1);
   bool adjArray = P.getOption("-j");
   bool ordered = P.getOption("-o");
+  bool symmetrize = P.getOption("-t");
 
   edgeArray<size_t> EA = edgeRmat<size_t>(n, m, seed, a, b, c);
-  writeGraphFromEdges(EA, fname, adjArray, ordered);
+  writeGraphFromEdges(symmetrize ? makeSymmetric(EA) : EA, fname, adjArray, ordered);
 }
