@@ -3,10 +3,14 @@ include common/parallelDefs
 COMMON = common/sequenceIO.h common/IO.h
 LIB = pbbslib/parse_command_line.h pbbslib/parallel.h
 SEQUENCEGEN = $(COMMON) $(LIB)
-GENERATORS = equalSeq randomSeq almostSortedSeq exptSeq trigramSeq addDataSeq trigramString
+GENERATORS = equalSeq randomSeq almostSortedSeq exptSeq
+# The generators below are currently failing to build -- Mike
+#trigramSeq addDataSeq trigramString 
 
 .PHONY: all clean
 all: $(GENERATORS)
+install:
+	cp $(GENERATORS) $(INSTALL_FOLDER)
 
 addDataSeq : addDataSeq.C sequenceData.h $(SEQUENCEGEN)
 	$(CC) $(CFLAGS) $(LFLAGS) -o $@ $@.C

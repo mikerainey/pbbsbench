@@ -38,6 +38,7 @@ stdenv.mkDerivation rec {
 
     make -j $NIX_BUILD_CORES -C testData/geometryData all
     make -j $NIX_BUILD_CORES -C testData/graphData all
+    make -j $NIX_BUILD_CORES -C testData/sequenceData all
     '';
 
   outputs = [ "out" "testData" ];
@@ -60,5 +61,9 @@ stdenv.mkDerivation rec {
     mkdir -p $testData/graphData
     make -C testData/graphData install \
       INSTALL_FOLDER="$testData/graphData"
+
+    mkdir -p $testData/sequenceData
+    make -C testData/sequenceData install \
+      INSTALL_FOLDER="$testData/sequenceData"
     '';
 }   

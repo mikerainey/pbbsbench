@@ -58,12 +58,12 @@ namespace benchIO {
 
   string seqHeader(elementType dt) {
     switch (dt) {
-    case intType: return "sequenceInt";
-    case doubleT: return "sequenceDouble";
-    case stringT: return "sequenceChar";
-    case intPairT: return "sequenceIntPair";
-    case stringIntPairT: return "sequenceStringIntPair";
-    case doublePairT: return "sequenceDoublePair";
+    case intType: return "pbbs_sequenceInt";
+    case doubleT: return "pbbs_sequenceDouble";
+    case stringT: return "pbbs_sequenceChar";
+    case intPairT: return "pbbs_sequenceIntPair";
+    case stringIntPairT: return "pbbs_sequenceStringIntPair";
+    case doublePairT: return "pbbs_sequenceDoublePair";
     default: 
       cout << "writeSeqToFile: type not supported" << endl; 
       abort();

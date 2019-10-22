@@ -187,7 +187,7 @@ namespace benchIO {
     return bytes;
   }
 
-  string intHeaderIO = "sequenceInt";
+  string intHeaderIO = "pbbs_sequenceInt";
 
   template <class T>
   int writeIntSeqToFile(sequence<T> const &A, char const *fileName) {
