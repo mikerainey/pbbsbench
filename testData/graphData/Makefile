@@ -1,7 +1,7 @@
 include common/parallelDefs
 
 COMMON = common/graph.h common/graphIO.h common/graphUtils.h
-GENERATORS = rMatGraph gridGraph randLocalGraph nBy2Comps lineGraph addWeights adjToEdgeArray edgeArrayToAdj 
+GENERATORS = rMatGraph gridGraph phasedGraph parallelPathsGraph randLocalGraph nBy2Comps lineGraph addWeights adjToEdgeArray edgeArrayToAdj 
 
 NOTUPDATED_GENERATORS = powerGraph addWeights randDoubleVector fromAdjIdx adjElimSelfEdges starGraph combGraph adjGraphAddWeights binTree randGraph reorderGraph randomizeGraphOrder adjGraphAddSourceSink dimacsToFlowGraph adjToBinary adjWghToBinary
 
@@ -18,6 +18,12 @@ rMatGraph : rMatGraph.o
 
 gridGraph : gridGraph.o 
 	$(CC) $(LFLAGS) -o $@ gridGraph.o 
+
+phasedGraph : phasedGraph.o 
+	$(CC) $(LFLAGS) -o $@ phasedGraph.o 
+
+parallelPathsGraph : parallelPathsGraph.o 
+	$(CC) $(LFLAGS) -o $@ parallelPathsGraph.o 
 
 nBy2Comps : nBy2Comps.o 
 	$(CC) $(LFLAGS) -o $@ nBy2Comps.o 
