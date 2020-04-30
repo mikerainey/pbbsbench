@@ -64,11 +64,9 @@ int main(int argc, char* argv[]) {
   char* fname = in.second;
   bool ordered = P.getOption("-o");
   bool adjArray = P.getOption("-j");
-  size_t parallel_paths_nb_phases = 3;
-  size_t parallel_paths_nb_paths_per_phase = 10;
-  size_t parallel_paths_nb_edges_per_path = 10;
-  auto nb_phases = n / parallel_paths_nb_phases / parallel_paths_nb_paths_per_phase;
-  auto nb_edges_per_path = std::max((size_t)1, n);
-  edgeArray<size_t> EA = parallelPaths<size_t>(parallel_paths_nb_phases, parallel_paths_nb_paths_per_phase, nb_edges_per_path);
+  size_t parallel_paths_nb_phases = 1;
+  size_t parallel_paths_nb_paths_per_phase = P.getOptionLongValue("-p", 10);
+  size_t parallel_paths_nb_edges_per_path = n / parallel_paths_nb_paths_per_phase / parallel_paths_nb_phases;
+  edgeArray<size_t> EA = parallelPaths<size_t>(parallel_paths_nb_phases, parallel_paths_nb_paths_per_phase, parallel_paths_nb_edges_per_path);
   writeGraphFromEdges(EA, fname, adjArray, ordered);
 }
