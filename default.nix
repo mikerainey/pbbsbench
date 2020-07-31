@@ -53,6 +53,7 @@ stdenv.mkDerivation rec {
     # Sources
     cp -r convexHull $out/convexHull
     cp -r breadthFirstSearch $out/breadthFirstSearch
+    cp -r suffixArray $out/suffixArray
 
     mkdir -p $testData/geometryData
     make -C testData/geometryData install \
